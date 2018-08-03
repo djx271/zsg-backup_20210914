@@ -6,9 +6,9 @@ object Test01 extends App with Test01Helper {
 
   case class Abc(name: String, def1: Def)
 
-  case class Def(age: Int, abc: Abc)
+  case class Def(age: Int)
 
-  val value = Wrap("sgfsafger", "sdfsdfseaetgerg", Abc("sdfsdfarfe", Def(16, null)))
+  val value = Wrap("sgfsafger", "sdfsdfseaetgerg", Abc("sdfsdfarfe", Def(16)))
 
   implicitly[CirceEncoderConfirmOrder[Def]]
 

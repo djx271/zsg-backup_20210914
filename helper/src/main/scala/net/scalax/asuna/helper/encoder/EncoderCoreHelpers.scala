@@ -4,11 +4,11 @@ import net.scalax.asuna.core.encoder.{ EncoderShape, EncoderShapeValue }
 
 trait EncoderDataShapeValueHelper[D] {
 
-  def wrap[A, B, C](rep: A)(implicit shape: EncoderShape[A, B, C, D]): C = {
+  def wrap[A, B, C](rep: A)(implicit shape: => EncoderShape[A, B, C, D]): C = {
     shape.wrapRep(rep)
   }
 
-  def shaped[A, B, C](rep: A)(implicit shape: EncoderShape[A, B, C, D]): EncoderShapeValue[B, D] = {
+  def shaped[A, B, C](rep: A)(implicit shape: => EncoderShape[A, B, C, D]): EncoderShapeValue[B, D] = {
     val shape1 = shape
     val rep1 = rep
     new EncoderShapeValue[B, D] {
