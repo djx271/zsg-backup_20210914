@@ -1,10 +1,13 @@
-scalaVersion := "2.12.6"
+resolvers += "scala-integration" at
+  "https://scala-ci.typesafe.com/artifactory/scala-integration/"
 
-scalacOptions ++= Seq("-feature", "-deprecation", "-Ywarn-unused-import"/*, "-Xlog-implicits"*/)
+scalaVersion := "2.13.0-pre-29f6907"
 
-addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full)
+scalacOptions ++= Seq("-feature", "-deprecation"/*, "-Xlog-implicits"*/)
 
-addCompilerPlugin("org.spire-math" % "kind-projector" % "0.9.6" cross CrossVersion.binary)
+/*addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full)
+
+addCompilerPlugin("org.spire-math" % "kind-projector" % "0.9.6" cross CrossVersion.binary)*/
 
 lazy val core = (project in file("./core"))
 lazy val helper = (project in file("./helper"))

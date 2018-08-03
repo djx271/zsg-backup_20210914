@@ -1,15 +1,10 @@
 package net.scalax.asuna.circe
 
-import io.circe.{ Encoder, Json, JsonObject }
+import io.circe.JsonObject
 import net.scalax.asuna.circe.aaaa.CirceAsunaEncoder
-import net.scalax.asuna.circe.another.{ Abcdef, CirceEncoderConfirmOrder, CirceMacro }
-import net.scalax.asuna.core.common.{ DataGroup, DataRepGroup, Placeholder }
 import net.scalax.asuna.core.encoder.EncoderShape
-import net.scalax.asuna.helper.MacroColumnInfo
-import net.scalax.asuna.helper.encoder.{ EncoderContent, EncoderHelper, EncoderWrapperHelper, ForTableInput }
+import net.scalax.asuna.helper.encoder.{ EncoderContent, EncoderHelper, EncoderWrapperHelper }
 import shapeless.Lazy
-
-import scala.language.experimental.macros
 
 trait ACirceEncoderWrapper[RepOut, DataType] extends EncoderContent[RepOut, DataType] {
   def write(data: DataType): JsonObject
@@ -57,7 +52,7 @@ trait CirceAsunaEncoderHelper {
 
   //implicit def caseOnlyEncoderImplicit[Case]: ForTableInput[EmptyCirceTable, Case, CirceAsunaEncoder] = macro EncoderMapper.EncoderMapperImpl.impl[EmptyCirceTable, Case, CirceAsunaEncoder]
 
-  implicit def circeEncoderContentImplicit[D]: CirceEncoderConfirmOrder[D] = macro CirceMacro.AsunaCirceEncoderHelper.inferImpl[D]
+  //implicit def circeEncoderContentImplicit[D]: CirceEncoderConfirmOrder[D] = macro CirceMacro.AsunaCirceEncoderHelper.inferImpl[D]
 
   val asunaCirce = asunaCirceImpl
 

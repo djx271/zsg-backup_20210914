@@ -1,12 +1,5 @@
 package net.scalax.asuna.shape
 
-import net.scalax.asuna.core.common.RepGroup
-import net.scalax.asuna.core.decoder.{ DecoderShape, DecoderShapeValue }
-import net.scalax.asuna.core.encoder.{ EncoderShape, EncoderShapeValue }
-import shapeless.{ ::, HNil }
-
-import scala.language.implicitConversions
-
 trait ShapeHelper {
 
   /*implicit def liftToShapeValueExtendsionMethod[A, B, C, D](rep: A)(implicit shape: DecoderShape[A, B, C, D]): DecoderShapeValue[B, D] = {

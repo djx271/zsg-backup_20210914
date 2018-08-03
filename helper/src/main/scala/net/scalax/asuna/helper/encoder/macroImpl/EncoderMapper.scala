@@ -18,7 +18,7 @@ object EncoderMapper {
   case class ContextValNames(selfInputTableImplicit: String, finalOutPutDefName: String, modelGen: String)
 
   trait EncoerShapeApply[Abs] {
-    def withEncoderShape[T, D, U](rep: T, pro: PropertyType[D])(implicit shape: EncoderShape[T, D, U, Abs]): EncoderShapeValue[D, Abs] = {
+    def withEncoderShape[T, D, U](rep: T, pro: PropertyType[D])(implicit shape: => EncoderShape[T, D, U, Abs]): EncoderShapeValue[D, Abs] = {
       val rep1 = rep
       val shape1 = shape
       new EncoderShapeValue[D, Abs] {
@@ -195,15 +195,18 @@ object EncoderMapper {
           val implicitFunctionName = TermName(cusFreshName("SelfInputTableInplicit"))
 
           val outPutDefName = TermName(cusFreshName("outPutDef"))
+          val adfsdferser = TermName(cusFreshName("outPutDef"))
+
+          //implicit def $implicitFunctionName: $inputTable = null
 
           q"""
           new $forTableInput {
             tableSelf =>
 
             override def input(${TermName(repModelTermName)}: $table): $shapeValue = {
-              new $shapeHelper {
+              val $adfsdferser = new $shapeHelper {
 
-                implicit def $implicitFunctionName: $inputTable = tableSelf
+             implicit def $implicitFunctionName: $inputTable = tableSelf
 
                 def $outPutDefName = {
                   $mgDef
@@ -211,7 +214,8 @@ object EncoderMapper {
                   ${toShape(modelFieldNames)}
                 }
 
-              }.$outPutDefName
+              }
+              $adfsdferser.$outPutDefName
             }
           }: ${weakTypeOf[ForTableInput[Table, Case, Abs]]}
         """
